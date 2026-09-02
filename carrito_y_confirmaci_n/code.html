@@ -320,7 +320,8 @@
             let subtotal = 0;
             items.forEach((item) => {
                 const priceText = [...item.querySelectorAll('span')].map((span) => span.textContent.trim()).find((text) => /^Bs\s*\d/.test(text));
-                const quantity = Number(item.querySelector('.material-symbols-outlined')?.closest('.flex')?.querySelector('span:not(.material-symbols-outlined)')?.textContent.trim()) || 0;
+                const increaseButton = item.querySelector('button[aria-label="Increase quantity"]');
+                const quantity = Number(increaseButton?.previousElementSibling?.textContent.trim()) || 0;
                 subtotal += Number(priceText?.replace('Bs', '').trim()) * quantity;
             });
             const tax = subtotal * 0.08;
