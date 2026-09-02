@@ -277,6 +277,15 @@
             const matchesSearch = !query || product.textContent.toLowerCase().includes(query);
             product.hidden = !(matchesCategory && matchesSearch);
         });
+        let emptyState = document.getElementById('menuEmptyState');
+        if (!emptyState) {
+            emptyState = document.createElement('p');
+            emptyState.id = 'menuEmptyState';
+            emptyState.className = 'col-span-full hidden py-lg text-center text-tertiary';
+            emptyState.textContent = 'No encontramos productos con esos filtros.';
+            products[0]?.parentElement.appendChild(emptyState);
+        }
+        emptyState.classList.toggle('hidden', products.some((product) => !product.hidden));
     }
     categoryButtons.forEach((button) => button.addEventListener('click', () => {
         categoryButtons.forEach((item) => item.classList.remove('bg-primary-container', 'text-on-primary-container', 'shadow-md'));
