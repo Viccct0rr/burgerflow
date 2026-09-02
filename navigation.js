@@ -166,7 +166,6 @@
     .bf-standard-sidebar > div:first-child { display:flex !important; flex-direction:row !important; align-items:center !important; gap:10px !important; margin:0 0 20px !important; padding:0 10px 12px !important; }
     .bf-standard-sidebar > div:first-child > div:first-child { width:40px; height:40px; display:grid; place-items:center; flex:0 0 40px; border-radius:10px; background:#d32f2f; }
     .bf-standard-sidebar > div:first-child > div:first-child img { display:none; }
-    .bf-standard-sidebar > div:first-child > div:first-child::before { content:'restaurant'; color:#fff; font:24px/1 'Material Symbols Outlined'; }
     .bf-standard-sidebar > div:first-child h1 { margin:0 !important; font:700 20px/1.2 Montserrat,sans-serif !important; }
     .bf-standard-sidebar > div:first-child p { margin:5px 0 0 !important; font:11px/1.2 Inter,sans-serif !important; }
     .bf-standard-sidebar > button { width:calc(100% - 0px) !important; margin:0 0 20px !important; min-height:48px; }
