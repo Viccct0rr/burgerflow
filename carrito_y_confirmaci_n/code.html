@@ -233,6 +233,7 @@
 <span class="">Total</span>
 <span class="">Bs 21.02</span>
 </div>
+<label class="flex flex-col gap-xs font-label-md text-label-md text-on-surface-variant">Método de pago<select id="paymentMethod" required class="w-full border-2 border-surface-variant rounded-lg p-sm bg-surface-container-lowest"><option value="">Selecciona un método</option><option value="Efectivo">Efectivo</option><option value="Tarjeta">Tarjeta</option><option value="QR">QR</option></select></label>
 <button class="mt-sm w-full bg-primary-container text-on-primary font-label-lg text-label-lg h-14 rounded-lg soft-float hover-soft-float transition-all active:scale-95 flex items-center justify-center gap-2" id="confirmOrderBtn">
 <span class="">Ir a Pagar</span>
 <span class="material-symbols-outlined">arrow_forward</span>
@@ -350,15 +351,7 @@
             empty.classList.toggle('hidden', Boolean(items.length));
         }
         cartMain.addEventListener('click', () => setTimeout(updateCart, 0));
-        const paymentField = document.createElement('select');
-        paymentField.id = 'paymentMethod';
-        paymentField.className = 'w-full border-2 border-surface-variant rounded-lg p-sm bg-surface-container-lowest';
-        paymentField.innerHTML = '<option value="">Selecciona un método de pago</option><option value="Efectivo">Efectivo</option><option value="Tarjeta">Tarjeta</option><option value="QR">QR</option>';
-        const paymentLabel = document.createElement('label');
-        paymentLabel.className = 'flex flex-col gap-xs font-label-md text-label-md text-on-surface-variant';
-        paymentLabel.textContent = 'Método de pago';
-        paymentLabel.appendChild(paymentField);
-        document.getElementById('confirmOrderBtn').before(paymentLabel);
+        const paymentField = document.getElementById('paymentMethod');
         document.getElementById('confirmOrderBtn').addEventListener('click', (event) => {
             if (!cartItems().length || !paymentField.value) {
                 event.preventDefault();
