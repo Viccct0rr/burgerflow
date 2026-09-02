@@ -136,7 +136,7 @@
     closeButton.type = 'button';
     closeButton.setAttribute('aria-label', 'Cerrar navegación');
     closeButton.innerHTML = '<span class="material-symbols-outlined">close</span>';
-    shell.prepend(closeButton);
+    shell.append(closeButton);
     toggle.setAttribute('aria-controls', 'bf-main-navigation');
     toggle.setAttribute('aria-expanded', 'false');
     shell.id = 'bf-main-navigation';
