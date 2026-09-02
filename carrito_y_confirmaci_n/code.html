@@ -350,8 +350,20 @@
             empty.classList.toggle('hidden', Boolean(items.length));
         }
         cartMain.addEventListener('click', () => setTimeout(updateCart, 0));
+        const paymentField = document.createElement('select');
+        paymentField.id = 'paymentMethod';
+        paymentField.className = 'w-full border-2 border-surface-variant rounded-lg p-sm bg-surface-container-lowest';
+        paymentField.innerHTML = '<option value="">Selecciona un método de pago</option><option value="Efectivo">Efectivo</option><option value="Tarjeta">Tarjeta</option><option value="QR">QR</option>';
+        const paymentLabel = document.createElement('label');
+        paymentLabel.className = 'flex flex-col gap-xs font-label-md text-label-md text-on-surface-variant';
+        paymentLabel.textContent = 'Método de pago';
+        paymentLabel.appendChild(paymentField);
+        document.getElementById('confirmOrderBtn').before(paymentLabel);
         document.getElementById('confirmOrderBtn').addEventListener('click', (event) => {
-            if (!cartItems().length) event.stopImmediatePropagation();
+            if (!cartItems().length || !paymentField.value) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
         }, true);
         updateCart();
     </script>
