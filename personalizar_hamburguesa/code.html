@@ -164,7 +164,7 @@
 <div class="space-y-sm">
 <div class="flex justify-between items-start gap-4">
 <h1 class="font-display-lg text-display-lg md:font-headline-lg md:text-headline-lg font-black text-on-surface leading-tight">Bacon Blast Burger</h1>
-<span class="font-headline-lg text-headline-lg font-bold text-primary-container whitespace-nowrap">Bs 12.90</span>
+<span class="font-headline-lg text-headline-lg font-bold text-primary-container whitespace-nowrap">Bs 14.50</span>
 </div>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Doble medallón de carne de res, triple ración de tocino crujiente, queso cheddar fundido, cebolla caramelizada y nuestra salsa especial Flow.</p>
 </div>
@@ -334,8 +334,8 @@
         const customizationTotal = document.querySelector('button:last-child .font-headline-md');
         const customizationQuantity = document.querySelector('input[type="number"]');
         function updateCustomizationTotal() {
-            const size = document.querySelector('input[name="size"]:checked')?.closest('label');
-            const base = Number(size?.textContent.match(/Bs\s*([\d.]+)/)?.[1] || 0);
+            const size = document.querySelector('input[name="size"]:checked');
+            const base = Number(document.querySelector('h1 + span')?.textContent.match(/Bs\s*([\d.]+)/)?.[1] || 0) + (size?.value === 'grande' ? 2 : 0);
             const extras = [...document.querySelectorAll('input[type="checkbox"]:checked')].reduce((sum, input) => sum + Number(input.closest('label').textContent.match(/\+\s*Bs\s*([\d.]+)/)?.[1] || 0), 0);
             const total = (base + extras) * Math.max(1, Number(customizationQuantity.value) || 1);
             if (customizationTotal) customizationTotal.textContent = `Total: Bs ${total.toFixed(2)}`;
