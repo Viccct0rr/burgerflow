@@ -131,7 +131,19 @@
     const closeNavigation = () => { shell.classList.remove('bf-open'); backdrop.classList.remove('bf-visible'); };
     toggle.addEventListener('click', () => { shell.classList.toggle('bf-open'); backdrop.classList.toggle('bf-visible'); });
     backdrop.addEventListener('click', closeNavigation);
+    const closeButton = document.createElement('button');
+    closeButton.className = 'bf-close-navigation';
+    closeButton.type = 'button';
+    closeButton.setAttribute('aria-label', 'Cerrar navegación');
+    closeButton.innerHTML = '<span class="material-symbols-outlined">close</span>';
+    shell.prepend(closeButton);
+    toggle.setAttribute('aria-controls', 'bf-main-navigation');
+    toggle.setAttribute('aria-expanded', 'false');
+    shell.id = 'bf-main-navigation';
+    closeButton.addEventListener('click', closeNavigation);
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeNavigation(); });
     shell.querySelectorAll('a, button').forEach((item) => item.addEventListener('click', closeNavigation));
+    toggle.addEventListener('click', () => toggle.setAttribute('aria-expanded', shell.classList.contains('bf-open') ? 'false' : 'true'));
   }
 
   const style = document.createElement('style');
@@ -182,8 +194,11 @@
       body > nav:not(.persistent-sidebar).bf-open { transform:translateX(0); }
       body > main { margin-left:0 !important; }
       .bf-mobile-toggle { position:fixed; top:12px; left:12px; z-index:80; width:44px; height:44px; display:grid; place-items:center; border:1px solid #e2e2e2; border-radius:10px; color:#1a1c1c; background:#fff; box-shadow:0 4px 12px rgba(33,33,33,.12); }
+      .bf-close-navigation { display:none; }
+      .bf-standard-sidebar .bf-close-navigation { position:absolute; top:12px; right:12px; }
       .bf-nav-backdrop { position:fixed; inset:0; z-index:49; border:0; background:rgba(26,28,28,.38); }
       .bf-nav-backdrop.bf-visible { display:block; }
+      .bf-standard-sidebar.bf-open .bf-close-navigation { display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:8px; color:#fff; background:transparent; }
     }
   `;
   document.head.appendChild(style);
