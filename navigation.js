@@ -163,6 +163,7 @@
     .bf-active { color:#ffffff !important; background:#4a4d4d !important; border-left-color:#d32f2f !important; font-weight:700 !important; }
     .bf-active .material-symbols-outlined { color:#ffb3ac !important; }
     .bf-standard-sidebar { padding:24px 16px !important; }
+    .bf-standard-sidebar.bf-open { display:flex !important; }
     .bf-standard-sidebar > div:first-child { display:flex !important; flex-direction:row !important; align-items:center !important; gap:10px !important; margin:0 0 20px !important; padding:0 10px 12px !important; }
     .bf-standard-sidebar > div:first-child > div:first-child { width:40px; height:40px; display:grid; place-items:center; flex:0 0 40px; border-radius:10px; background:#d32f2f; }
     .bf-standard-sidebar > div:first-child > div:first-child img { display:none; }
@@ -219,6 +220,7 @@
   const menuSearch = document.getElementById('menuSearch');
   menuSearch?.addEventListener('input', () => {
     const query = menuSearch.value.trim().toLowerCase();
+    if (typeof updateMenu === 'function') { updateMenu(); return; }
     document.querySelectorAll('[data-product]').forEach((product) => {
       product.hidden = Boolean(query) && !product.textContent.toLowerCase().includes(query);
     });
