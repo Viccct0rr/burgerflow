@@ -313,7 +313,7 @@
 <script src="../navigation.js?v=2"></script>
 <script>
         const cartMain = document.querySelector('main');
-        const cartItems = () => [...cartMain.querySelectorAll('.group')].filter((item) => item.querySelector('.material-symbols-outlined')?.textContent.trim() === 'delete');
+        const cartItems = () => [...cartMain.querySelectorAll('.group')].filter((item) => item.querySelector('button[aria-label="Increase quantity"]'));
         const money = (value) => `Bs ${value.toFixed(2)}`;
         function updateCart() {
             const items = cartItems();
@@ -326,7 +326,8 @@
             const tax = subtotal * 0.08;
             const service = items.length ? 0.5 : 0;
             const total = subtotal + tax + service;
-            const values = [...cartMain.querySelectorAll('.justify-between span:last-child')];
+            const summary = document.getElementById('confirmOrderBtn').closest('.soft-float');
+            const values = [...summary.querySelectorAll('.justify-between span:last-child')];
             if (values.length >= 4) {
                 values[0].textContent = money(subtotal);
                 values[1].textContent = money(tax);
