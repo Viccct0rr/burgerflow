@@ -188,7 +188,7 @@
     body > nav:not(.persistent-sidebar) { width:256px !important; flex:0 0 256px !important; }
     body > nav:not(.persistent-sidebar) a, body > nav:not(.persistent-sidebar) button { min-height:44px; }
     .persistent-sidebar { width:256px !important; flex:0 0 256px !important; }
-    .bf-mobile-toggle, .bf-nav-backdrop { display:none; }
+    .bf-mobile-toggle, .bf-nav-backdrop, .bf-close-navigation { display:none !important; }
     @media (max-width:760px) {
       body > nav:not(.persistent-sidebar) { transform:translateX(-105%); transition:transform .2s ease; }
       body > nav:not(.persistent-sidebar).bf-open { transform:translateX(0); }
@@ -198,7 +198,7 @@
       .bf-standard-sidebar .bf-close-navigation { position:absolute; top:12px; right:12px; }
       .bf-nav-backdrop { position:fixed; inset:0; z-index:49; border:0; background:rgba(26,28,28,.38); }
       .bf-nav-backdrop.bf-visible { display:block; }
-      .bf-standard-sidebar.bf-open .bf-close-navigation { display:grid; place-items:center; width:44px; height:44px; border:0; border-radius:8px; color:#fff; background:transparent; }
+      .bf-standard-sidebar.bf-open .bf-close-navigation { display:grid !important; place-items:center; width:44px; height:44px; border:0; border-radius:8px; color:#fff; background:transparent; }
     }
   `;
   document.head.appendChild(style);
