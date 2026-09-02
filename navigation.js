@@ -128,12 +128,13 @@
     backdrop.type = 'button';
     backdrop.setAttribute('aria-label', 'Cerrar navegación');
     document.body.appendChild(backdrop);
-    const closeNavigation = () => { shell.classList.remove('bf-open'); backdrop.classList.remove('bf-visible'); toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
+    const closeNavigation = () => { shell.classList.remove('bf-open'); backdrop.classList.remove('bf-visible'); closeButton.style.display = 'none'; toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
     toggle.addEventListener('click', () => { shell.classList.toggle('bf-open'); backdrop.classList.toggle('bf-visible'); });
     backdrop.addEventListener('click', closeNavigation);
     const closeButton = document.createElement('button');
     closeButton.className = 'bf-close-navigation';
     closeButton.type = 'button';
+    closeButton.style.display = 'none';
     closeButton.setAttribute('aria-label', 'Cerrar navegación');
     closeButton.innerHTML = '<span class="material-symbols-outlined">close</span>';
     shell.append(closeButton);
@@ -143,7 +144,7 @@
     closeButton.addEventListener('click', closeNavigation);
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeNavigation(); });
     shell.querySelectorAll('a, button').forEach((item) => item.addEventListener('click', closeNavigation));
-    toggle.addEventListener('click', () => toggle.setAttribute('aria-expanded', shell.classList.contains('bf-open') ? 'false' : 'true'));
+    toggle.addEventListener('click', () => { const open = shell.classList.contains('bf-open'); toggle.setAttribute('aria-expanded', open ? 'false' : 'true'); closeButton.style.display = open ? 'none' : 'grid'; });
   }
 
   const style = document.createElement('style');
