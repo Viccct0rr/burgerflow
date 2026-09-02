@@ -326,7 +326,7 @@
             const tax = subtotal * 0.08;
             const service = items.length ? 0.5 : 0;
             const total = subtotal + tax + service;
-            const summary = document.getElementById('confirmOrderBtn').closest('.soft-float');
+            const summary = document.getElementById('confirmOrderBtn').parentElement;
             const values = [...summary.querySelectorAll('.justify-between span:last-child')];
             if (values.length >= 4) {
                 values[0].textContent = money(subtotal);
