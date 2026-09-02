@@ -330,4 +330,18 @@
 
 
 <script src="../navigation.js?v=2"></script>
+<script>
+        const customizationTotal = document.querySelector('button:last-child .font-headline-md');
+        const customizationQuantity = document.querySelector('input[type="number"]');
+        function updateCustomizationTotal() {
+            const size = document.querySelector('input[name="size"]:checked')?.closest('label');
+            const base = Number(size?.textContent.match(/Bs\s*([\d.]+)/)?.[1] || 0);
+            const extras = [...document.querySelectorAll('input[type="checkbox"]:checked')].reduce((sum, input) => sum + Number(input.closest('label').textContent.match(/\+\s*Bs\s*([\d.]+)/)?.[1] || 0), 0);
+            const total = (base + extras) * Math.max(1, Number(customizationQuantity.value) || 1);
+            if (customizationTotal) customizationTotal.textContent = `Total: Bs ${total.toFixed(2)}`;
+        }
+        document.querySelectorAll('input[name="size"], input[type="checkbox"]').forEach((input) => input.addEventListener('change', updateCustomizationTotal));
+        customizationQuantity?.addEventListener('input', updateCustomizationTotal);
+        updateCustomizationTotal();
+    </script>
 </body></html>
