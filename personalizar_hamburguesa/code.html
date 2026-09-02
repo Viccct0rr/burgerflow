@@ -273,7 +273,7 @@
 </button>
 </div>
 <!-- Add to Cart CTA -->
-<button class="w-full h-[56px] bg-primary text-on-primary hover:bg-primary-container shadow-[0px_4px_12px_rgba(33,33,33,0.08)] hover:shadow-[0px_8px_16px_rgba(33,33,33,0.12)] transition-all rounded-lg px-6 flex items-center justify-between flex-1 group active:scale-[0.98]">
+<button id="addToCartBtn" class="w-full h-[56px] bg-primary text-on-primary hover:bg-primary-container shadow-[0px_4px_12px_rgba(33,33,33,0.08)] hover:shadow-[0px_8px_16px_rgba(33,33,33,0.12)] transition-all rounded-lg px-6 flex items-center justify-between flex-1 group active:scale-[0.98]">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform">shopping_cart</span>
 <span class="font-label-lg text-label-lg uppercase tracking-wider">Agregar al Carrito</span>
@@ -342,6 +342,14 @@
         }
         document.querySelectorAll('input[name="size"], input[type="checkbox"]').forEach((input) => input.addEventListener('change', updateCustomizationTotal));
         customizationQuantity?.addEventListener('input', updateCustomizationTotal);
+        document.getElementById('addToCartBtn')?.addEventListener('click', () => {
+            sessionStorage.setItem('burgerflowCustomization', JSON.stringify({
+                product: document.querySelector('h1')?.textContent.trim(),
+                size: document.querySelector('input[name="size"]:checked')?.value,
+                extras: [...document.querySelectorAll('input[type="checkbox"]:checked')].map((input) => input.closest('label').textContent.trim()),
+                quantity: Number(customizationQuantity.value) || 1
+            }));
+        });
         updateCustomizationTotal();
     </script>
 </body></html>
