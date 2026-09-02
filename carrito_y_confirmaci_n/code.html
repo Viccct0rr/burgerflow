@@ -319,7 +319,7 @@
             const items = cartItems();
             let subtotal = 0;
             items.forEach((item) => {
-                const priceText = [...item.querySelectorAll('span')].map((span) => span.textContent.trim()).find((text) => /^Bs\s*\d/.test(text));
+                const priceText = item.querySelector('h2 + span')?.textContent.trim();
                 const increaseButton = item.querySelector('button[aria-label="Increase quantity"]');
                 const quantity = Number(increaseButton?.previousElementSibling?.textContent.trim()) || 0;
                 subtotal += Number(priceText?.replace('Bs', '').trim()) * quantity;
