@@ -128,7 +128,7 @@
     backdrop.type = 'button';
     backdrop.setAttribute('aria-label', 'Cerrar navegación');
     document.body.appendChild(backdrop);
-    const closeNavigation = () => { shell.classList.remove('bf-open'); backdrop.classList.remove('bf-visible'); };
+    const closeNavigation = () => { shell.classList.remove('bf-open'); backdrop.classList.remove('bf-visible'); toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
     toggle.addEventListener('click', () => { shell.classList.toggle('bf-open'); backdrop.classList.toggle('bf-visible'); });
     backdrop.addEventListener('click', closeNavigation);
     const closeButton = document.createElement('button');
