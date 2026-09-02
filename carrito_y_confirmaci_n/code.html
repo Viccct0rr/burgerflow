@@ -311,4 +311,46 @@
 
 
 <script src="../navigation.js?v=2"></script>
+<script>
+        const cartMain = document.querySelector('main');
+        const cartItems = () => [...cartMain.querySelectorAll('.group')].filter((item) => item.querySelector('.material-symbols-outlined')?.textContent.trim() === 'delete');
+        const money = (value) => `Bs ${value.toFixed(2)}`;
+        function updateCart() {
+            const items = cartItems();
+            let subtotal = 0;
+            items.forEach((item) => {
+                const priceText = [...item.querySelectorAll('span')].map((span) => span.textContent.trim()).find((text) => /^Bs\s*\d/.test(text));
+                const quantity = Number(item.querySelector('.material-symbols-outlined')?.closest('.flex')?.querySelector('span:not(.material-symbols-outlined)')?.textContent.trim()) || 0;
+                subtotal += Number(priceText?.replace('Bs', '').trim()) * quantity;
+            });
+            const tax = subtotal * 0.08;
+            const service = items.length ? 0.5 : 0;
+            const total = subtotal + tax + service;
+            const values = [...cartMain.querySelectorAll('.justify-between span:last-child')];
+            if (values.length >= 4) {
+                values[0].textContent = money(subtotal);
+                values[1].textContent = money(tax);
+                values[2].textContent = money(service);
+                values[3].textContent = money(total);
+            }
+            const payButton = document.getElementById('confirmOrderBtn');
+            payButton.disabled = !items.length;
+            payButton.classList.toggle('opacity-50', !items.length);
+            payButton.classList.toggle('cursor-not-allowed', !items.length);
+            let empty = document.getElementById('emptyCartMessage');
+            if (!empty) {
+                empty = document.createElement('p');
+                empty.id = 'emptyCartMessage';
+                empty.className = 'hidden text-center text-tertiary p-md';
+                empty.textContent = 'Tu carrito está vacío.';
+                cartItems().at(-1)?.parentElement?.appendChild(empty);
+            }
+            empty.classList.toggle('hidden', Boolean(items.length));
+        }
+        cartMain.addEventListener('click', () => setTimeout(updateCart, 0));
+        document.getElementById('confirmOrderBtn').addEventListener('click', (event) => {
+            if (!cartItems().length) event.stopImmediatePropagation();
+        }, true);
+        updateCart();
+    </script>
 </body></html>
